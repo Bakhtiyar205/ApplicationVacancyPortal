@@ -78,6 +78,16 @@
               </div> -->
   
               <button type="submit" class="btn btn-success" [disabled]="applicationForm.invalid">Submit</button>
+
+              <div *ngIf="submitted">
+                <div *ngIf="!errorMessage" class="alert alert-success mt-3">
+                  Application submitted successfully!
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                  {{ errorMessage }}
+                </div>
+              </div>
+
             </form>
           </div>
         </div>

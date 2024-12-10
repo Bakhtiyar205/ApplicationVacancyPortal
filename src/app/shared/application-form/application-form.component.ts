@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, NgClass } from '@angular/common';
+import { PersonService } from '../../person/person.service';
 
 @Component({
   selector: 'app-application-form',
@@ -11,9 +12,11 @@ import { CommonModule, NgClass } from '@angular/common';
 })
 export class ApplicationFormComponent implements OnInit, OnChanges {
   applicationForm: FormGroup;
+  errorMessage: string = '';
+  submitted: boolean = false;
   @Input() vacancyId: number = 0;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public personService: PersonService) {
     this.applicationForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       surname: ['', [Validators.required, Validators.minLength(3)]],
@@ -38,10 +41,29 @@ export class ApplicationFormComponent implements OnInit, OnChanges {
   }
 
   onSubmit(): void {
+    this.submitted = true;  
+    this.errorMessage = '';
+
     if (this.applicationForm.valid) {
-      console.log(this.applicationForm.value);
+      this.personService.applyForVacancy(this.applicationForm.value).subscribe({
+        next: () => {
+          this.showMessageForDuration('Form submitted successfully!', 5000);
+        },
+        error: (err) => {
+          this.errorMessage = err.error?.detail || 'An error occurred during submission.';
+          this.showMessageForDuration(this.errorMessage, 5000);
+        }
+      });
     } else {
-      console.log('Form is not valid'); 
+      this.errorMessage = 'Form is not valid.';
+      this.showMessageForDuration(this.errorMessage, 5000);
     }
+  }
+  
+  private showMessageForDuration(message: string, duration: number): void {
+    setTimeout(() => {
+      this.submitted = false;  
+      this.errorMessage = '';  
+    }, duration);
   }
 }
