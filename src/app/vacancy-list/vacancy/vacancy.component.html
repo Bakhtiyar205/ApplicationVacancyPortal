@@ -1,0 +1,26 @@
+<div *ngIf="vacancy" class="container my-5">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card shadow-lg">
+          <div class="card-header bg-primary text-white text-center">
+            <h3>{{ vacancy.title }}</h3>
+          </div>
+          <div class="card-body">
+            <p class="text-muted"><strong>Vacancy ID:</strong> {{ vacancy.id }}</p>
+            <p><strong>Description:</strong> {{ vacancy.description }}</p>
+            <p *ngIf="vacancy.endDate !== null"><strong>Start Date:</strong> {{ vacancy.startDate | date:'longDate' }}</p>
+            <p *ngIf="vacancy.endDate !== null"><strong>End Date:</strong> {{ vacancy.endDate | date:'longDate' }}</p>
+          </div>
+          <div class="card-footer text-center">
+            <!-- <button class="btn btn-primary" (click)="applyForVacancy(vacancy.id)">Apply</button> -->
+            <button class="btn btn-primary" (click)="vacancyApply()" [disabled]="vacancyFormApply">Apply</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<app-application-form
+*ngIf="vacancyFormApply===true && vacancy?.id"
+[vacancyId]="vacancy.id"
+ ></app-application-form>

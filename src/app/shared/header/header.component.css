@@ -1,0 +1,9 @@
+.job-portal{
+    color: white;
+    text-decoration: none;
+}
+
+.job-portal:hover{
+    color: rgb(214, 214, 214);
+    text-decoration: none;
+}

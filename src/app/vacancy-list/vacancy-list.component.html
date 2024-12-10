@@ -1,0 +1,9 @@
+<ul class="list-group text-center">
+    <li *ngFor="let vacancy of vacancies?.items, let i = index" class="list-group-item">
+        <a [routerLink]="'/vacancy/' + vacancy.id" class="text-decoration-none">
+            {{ vacancy.title }}
+        </a>
+    </li>
+</ul>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3>Application Form</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  formControlName="name"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': applicationForm.get('name')?.invalid && applicationForm.get('name')?.touched }"
+                />
+                <div *ngIf="applicationForm.get('name')?.invalid && applicationForm.get('name')?.touched" class="invalid-feedback">
+                  Name is required and must be at least 3 characters long.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="surname" class="form-label">Surname</label>
+                <input
+                  type="text"
+                  id="surname"
+                  formControlName="surname"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': applicationForm.get('surname')?.invalid && applicationForm.get('surname')?.touched }"
+                />
+                <div *ngIf="applicationForm.get('surname')?.invalid && applicationForm.get('surname')?.touched" class="invalid-feedback">
+                  Surname is required and must be at least 3 characters long.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': applicationForm.get('email')?.invalid && applicationForm.get('email')?.touched }"
+                />
+                <div *ngIf="applicationForm.get('email')?.invalid && applicationForm.get('email')?.touched" class="invalid-feedback">
+                  A valid email is required.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="phoneNumber" class="form-label">Phone Number</label>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  formControlName="phoneNumber"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': applicationForm.get('phoneNumber')?.invalid && applicationForm.get('phoneNumber')?.touched }"
+                />
+                <div *ngIf="applicationForm.get('phoneNumber')?.invalid && applicationForm.get('phoneNumber')?.touched" class="invalid-feedback">
+                  Only Azerbaijani phone numbers are allowed.
+                </div>
+              </div>
+  
+              <!-- <div class="mb-3 d-none">
+                <label for="vacancyId" class="form-label">Vacancy ID</label>
+                <input
+                  type="text"
+                  id="vacancyId"
+                  formControlName="vacancyId"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': applicationForm.get('vacancyId')?.invalid && applicationForm.get('vacancyId')?.touched }"
+                />
+                <div *ngIf="applicationForm.get('vacancyId')?.invalid && applicationForm.get('vacancyId')?.touched" class="invalid-feedback">
+                  Vacancy ID must be greater than 0.
+                </div>
+              </div> -->
+  
+              <button type="submit" class="btn btn-success" [disabled]="applicationForm.invalid">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
