@@ -9,14 +9,14 @@
     <tbody>
         <tr *ngFor="let questionOption of questionOptionList?.items; let i = index">
             <td>
-                <a [routerLink]="'/questionOption/' + questionOption?.id" class="text-decoration-none text-primary">
-                    {{ questionOption?.vacancyName }}
-                </a>
+                <span class="text-decoration-none text-primary">
+                    {{ questionOption?.questionName }}
+                </span>
             </td>
             <td>
-                <a [routerLink]="'/questionOption/' + questionOption?.id" class="text-decoration-none text-secondary">
-                    {{ questionOption?.questionDetail }}
-                </a>
+                <span class="text-decoration-none text-secondary">
+                    {{ questionOption?.option }}
+                </span>
             </td>
             <td>
                 <button 
@@ -25,10 +25,15 @@
                     <fa-icon [icon]="faPenNib"></fa-icon>
                 </button>
                  <button 
-                    [routerLink]="'/question/' + questionOption?.id" 
+                    (click)="deleteQuestionOption(questionOption?.id)"
                     class="btn mx-1 btn-danger">
                     <fa-icon [icon]="faTrashCan"></fa-icon>
                 </button>
+        </tr>
+        <tr *ngIf="errorMessages">
+            <td colspan="3" class="text-center text-danger">
+                <strong>Error:</strong> {{ errorMessages }}
+            </td>
         </tr>
     </tbody>
 </table>

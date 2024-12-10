@@ -6,6 +6,7 @@ import { AppService } from '../services/app/app.service';
   providedIn: 'root'
 })
 export class QuestionOptionService extends AppService {
+  public QuestionOption = 'questionOption';
 
   constructor(public override http: HttpClient) { 
     super(http);
@@ -13,5 +14,9 @@ export class QuestionOptionService extends AppService {
 
   getQuestionOptions(data: any) {
     return this.get(this.http, 'questionOption', data);
+  }
+
+  deleteQuestionOption(params: any = {}) {
+    return this.delete(this.http, `${this.QuestionOption}/${params.id}`);
   }
 }

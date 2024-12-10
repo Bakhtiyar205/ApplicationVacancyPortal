@@ -20,7 +20,7 @@
                     <fa-icon [icon]="faPenNib"></fa-icon>
                 </button>
                 <button 
-                    [routerLink]="'/requirement/' + requirement?.id" 
+                    (click)="deleteRequirement(requirement?.id)"
                     class="btn mx-1 btn-danger">
                     <fa-icon [icon]="faTrashCan"></fa-icon>
                 </button>

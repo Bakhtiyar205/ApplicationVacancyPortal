@@ -9,14 +9,14 @@
     <tbody>
         <tr *ngFor="let question of questionList?.items; let i = index">
             <td>
-                <a [routerLink]="'/question/' + question?.id" class="text-decoration-none text-primary">
+                <span class="text-decoration-none text-primary">
                     {{ question?.vacancyName }}
-                </a>
+                </span>
             </td>
             <td>
-                <a [routerLink]="'/question/' + question?.id" class="text-decoration-none text-secondary">
+                <span class="text-decoration-none text-secondary">
                     {{ question?.questionDetail }}
-                </a>
+                </span>
             </td>
             <td>
                 <button 
@@ -25,10 +25,15 @@
                     <fa-icon [icon]="faPenNib"></fa-icon>
                 </button>
                  <button 
-                    [routerLink]="'/question/' + question?.id" 
+                    (click)="deleteQuestion(question?.id)" 
                     class="btn mx-1 btn-danger">
                     <fa-icon [icon]="faTrashCan"></fa-icon>
                 </button>
+        </tr>
+        <tr *ngIf="errorMessages">
+            <td colspan="3" class="text-center text-danger">
+                <strong>Error:</strong> {{ errorMessages }}
+            </td>
         </tr>
     </tbody>
 </table>

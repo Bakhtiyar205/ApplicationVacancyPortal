@@ -20,10 +20,15 @@
                     <fa-icon [icon]="faPenNib"></fa-icon>
                 </button>
                  <button 
-                    [routerLink]="'/vacancy/' + vacancy?.id" 
+                    (click)="deleteVacancy(vacancy?.id)"
                     class="btn mx-1 btn-danger">
                     <fa-icon [icon]="faTrashCan"></fa-icon>
                 </button>
+            </td>
+        </tr>
+        <tr *ngIf="errorMessages">
+            <td colspan="3" class="text-center text-danger">
+                <strong>Error:</strong> {{ errorMessages }}
             </td>
         </tr>
     </tbody>

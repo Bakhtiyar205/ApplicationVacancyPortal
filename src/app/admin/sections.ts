@@ -28,7 +28,7 @@ export const Sections =
     },
     { 
         id: 5,
-        name: 'QuestionOptions',
+        name: 'Question Options',
         Component: AdminQuestionOptionListComponent
     }
 ];

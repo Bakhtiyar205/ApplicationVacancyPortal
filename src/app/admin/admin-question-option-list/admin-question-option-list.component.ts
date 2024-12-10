@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPenNib, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-admin-question-option-list',
@@ -16,7 +17,8 @@ export class AdminQuestionOptionListComponent implements OnInit {
   questionOptionList: any;
   faPenNib = faPenNib;
   faTrashCan = faTrashCan;
-  
+  errorMessages: string = '';
+
   constructor(public questionOptionServices: QuestionOptionService) { }
 
   ngOnInit(): void {
@@ -29,4 +31,25 @@ export class AdminQuestionOptionListComponent implements OnInit {
     });
   }
 
+  deleteQuestionOption(id: number) {
+    this.questionOptionServices.deleteQuestionOption({id:id})
+    .pipe(finalize(()=>{
+      this.getQuestionOptions();
+    }))
+    .subscribe({
+      next: (response) => {
+        console.log("Question Options Deleted", response);
+      },
+      error: (err) => {
+          this.errorMessages = err.error?.detail || 'An error occurred during submission.';
+          this.showMessageForDuration(this.errorMessages, 5000);
+      }
+    });
+  }
+
+  private showMessageForDuration(message: string, duration: number): void {
+    setTimeout(() => {
+      this.errorMessages = '';  
+    }, duration);
+  }
 }
