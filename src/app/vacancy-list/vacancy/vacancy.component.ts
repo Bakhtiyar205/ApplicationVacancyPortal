@@ -28,7 +28,6 @@ export class VacancyComponent implements OnInit {
   getVacancies(){
     this.vacancyServices.getVacancyDetails(this.vacancyId.toString()).subscribe((data) => {
       this.vacancy = data;
-      console.log(this.vacancy);
     });
   }
 

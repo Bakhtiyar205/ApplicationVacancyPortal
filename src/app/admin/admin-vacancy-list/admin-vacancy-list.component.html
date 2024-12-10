@@ -1,0 +1,30 @@
+<table class="table table-bordered text-center">
+    <thead class="thead-light">
+        <tr>
+            <th class="col-9">Vacancy Title</th>
+            <th class="col-3">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vacancy of vacancyList?.items; let i = index">
+            <!-- Main Information Row -->
+            <td col-9>
+                <span class="text-decoration-none">
+                    {{ vacancy?.title }}
+                </span>
+            </td>
+            <td col-3>
+               <button 
+                    [routerLink]="'/vacancy' + vacancy?.id" 
+                    class="btn btn-primary">
+                    <fa-icon [icon]="faPenNib"></fa-icon>
+                </button>
+                 <button 
+                    [routerLink]="'/vacancy/' + vacancy?.id" 
+                    class="btn mx-1 btn-danger">
+                    <fa-icon [icon]="faTrashCan"></fa-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

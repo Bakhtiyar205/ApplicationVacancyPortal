@@ -1,0 +1,34 @@
+<table class="table table-bordered text-center">
+    <thead class="thead-light">
+        <tr>
+            <th class="text-primary col-3">Question</th>
+            <th class="text-secondary col-7">Option</th>
+            <th class="col-2">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let questionOption of questionOptionList?.items; let i = index">
+            <td>
+                <a [routerLink]="'/questionOption/' + questionOption?.id" class="text-decoration-none text-primary">
+                    {{ questionOption?.vacancyName }}
+                </a>
+            </td>
+            <td>
+                <a [routerLink]="'/questionOption/' + questionOption?.id" class="text-decoration-none text-secondary">
+                    {{ questionOption?.questionDetail }}
+                </a>
+            </td>
+            <td>
+                <button 
+                    [routerLink]="'/questionOption/' + questionOption?.id" 
+                    class="btn btn-primary">
+                    <fa-icon [icon]="faPenNib"></fa-icon>
+                </button>
+                 <button 
+                    [routerLink]="'/question/' + questionOption?.id" 
+                    class="btn mx-1 btn-danger">
+                    <fa-icon [icon]="faTrashCan"></fa-icon>
+                </button>
+        </tr>
+    </tbody>
+</table>
