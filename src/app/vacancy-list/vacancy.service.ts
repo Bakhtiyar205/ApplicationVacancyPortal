@@ -18,11 +18,19 @@ export class VacancyService extends AppService{
       return this.get(this.http, `Vacancy/${id}`);    
    }
 
+    public getVacancyById(data: any): Observable<any> {
+      return this.get(this.http, `${this.Vacancy}/${data.id}`);
+    }
+
    public deleteVacancy(params: any = {})  {
     return this.delete(this.http, `${this.Vacancy}/${params.id}`);
   }
 
-    public createVacancy(data: CreateVacancy){
+    public createVacancy(data: CreateVacancy) {
       return this.post(this.http, this.Vacancy, data);
+    }
+
+    public updateVacancy(data: any) {
+      return this.put(this.http, `${this.Vacancy}/${data.id}`, data);
     }
 }

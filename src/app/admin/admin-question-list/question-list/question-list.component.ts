@@ -26,7 +26,7 @@ export class QuestionListComponent implements OnInit {
     this.getQuestions();
   }
   getQuestions(){
-    this.questionServices.getQuestions({pageNumber: 0, pageSize: 10}).subscribe((data) => {
+    this.questionServices.getQuestions({pageNumber: 0, pageSize: 100}).subscribe((data) => {
       this.questionList = data;
     });
   }

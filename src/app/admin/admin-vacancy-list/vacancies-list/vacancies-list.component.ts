@@ -27,7 +27,7 @@ export class VacanciesListComponent implements OnInit {
   }
 
   getVacancies(){
-    this.vacancyServices.getVacancies({pageNumber: 0, pageSize: 10}).subscribe((data) => {
+    this.vacancyServices.getVacancies({pageNumber: 0, pageSize: 100}).subscribe((data) => {
       this.vacancyList = data;
     });
   }

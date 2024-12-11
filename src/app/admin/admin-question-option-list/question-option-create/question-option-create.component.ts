@@ -15,7 +15,8 @@ export class QuestionOptionCreateComponent {
   questionOption: QuestionOption = {
     id: 0,
     questionId: 0,
-    option: ''
+    option: '',
+    isAnswer: false
   };
 
   questionOptionForm: FormGroup;
@@ -26,7 +27,8 @@ export class QuestionOptionCreateComponent {
   constructor(private fb: FormBuilder, public questionService: QuestionService, public questionOptionService: QuestionOptionService) {
     this.questionOptionForm = this.fb.group({
       questionId: [null, Validators.required],
-      option: ['', [Validators.required, Validators.minLength(3)]]
+      option: ['', [Validators.required, Validators.minLength(3)]],
+      isAnswer: [this.questionOption.isAnswer, Validators.required]
     });
   }
 

@@ -1,4 +1,4 @@
-export interface QuestionOption{
+export interface UpdateQuestionOption {
     id: number;
     questionId: number;
     option: string;

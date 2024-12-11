@@ -18,11 +18,19 @@ export class QuestionService extends AppService {
       return this.get(this.http, `${this.Question}`, data);
    }
 
+   public getQuestionById(data: any){
+      return this.get(this.http, `${this.Question}/${data.id}`);
+   }
+
     public deleteQuestion(params: any = {})  {
       return this.delete(this.http, `${this.Question}/${params.id}`);
     }
 
     public createQuestion(data: CreateQuestion){
       return this.post(this.http, this.Question, data);
+    }
+
+    public updateQuestion(data: any){
+      return this.put(this.http, `${this.Question}/${data.id}`, data);
     }
 }

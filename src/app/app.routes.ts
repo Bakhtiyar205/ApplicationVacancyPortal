@@ -17,6 +17,10 @@ import { VacancyCreateComponent } from './admin/admin-vacancy-list/vacancy-creat
 import { VacanciesListComponent } from './admin/admin-vacancy-list/vacancies-list/vacancies-list.component';
 import { RequirementCreateComponent } from './admin/admin-requirement-list/requirement-create/requirement-create.component';
 import { QuestionCreateComponent } from './admin/admin-question-list/question-create/question-create.component';
+import { VacancyUpdateComponent } from './admin/admin-vacancy-list/vacancy-update/vacancy-update.component';
+import { QuestionUpdateComponent } from './admin/admin-question-list/question-update/question-update.component';
+import { QuestionOptionUpdateComponent } from './admin/admin-question-option-list/question-option-update/question-option-update.component';
+import { RequirementUpdateComponent } from './admin/admin-requirement-list/requirement-update/requirement-update.component';
 
 export const routes: Routes = [
     { path: 'vacancy', component: VacancyListComponent },
@@ -31,21 +35,26 @@ export const routes: Routes = [
       
       { path: 'vacancy', component: AdminVacancyListComponent, children:[
         {path: 'create', component: VacancyCreateComponent},
-        {path: 'list', component: VacanciesListComponent}
+        {path: 'list', component: VacanciesListComponent},
+        {path: 'edit/:id', component: VacancyUpdateComponent}
       ] },
       
       { path: 'question', component: AdminQuestionListComponent, children: [
         {path: 'create', component: QuestionCreateComponent},
-        {path: 'list', component: QuestionListComponent}
+        {path: 'list', component: QuestionListComponent},
+        {path: 'edit/:id', component: QuestionUpdateComponent}
       ]},
       
       { path: 'questionOption', component: AdminQuestionOptionListComponent, children:[
         {path: 'create', component: QuestionOptionCreateComponent},
-        {path: 'list', component: QuestionOptionListComponent}
+        {path: 'list', component: QuestionOptionListComponent},
+        {path: 'edit/:id', component: QuestionOptionUpdateComponent}
       ]},
+      
       { path: 'examrequirement', component: AdminRequirementListComponent, children:[
         {path: 'create', component: RequirementCreateComponent},
-        {path: 'list', component: RequirementListComponent}
+        {path: 'list', component: RequirementListComponent},
+        {path: 'edit/:id', component: RequirementUpdateComponent}
       ]},
 
     ]},

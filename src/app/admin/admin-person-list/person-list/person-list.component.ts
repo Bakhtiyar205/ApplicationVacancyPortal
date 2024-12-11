@@ -23,7 +23,7 @@ export class PersonListComponent implements OnInit {
 
 
   getPersons(){
-    this.personServices.getPeople().subscribe((data) => {
+    this.personServices.getPeople({pageNumber: 0, pageSize: 100}).subscribe((data) => {
       this.personList = data;
       console.log(this.personList);
     });

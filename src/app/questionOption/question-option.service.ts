@@ -16,12 +16,20 @@ export class QuestionOptionService extends AppService {
     return this.get(this.http, 'questionOption', data);
   }
 
+  getQuestionOptionById(data: any) {
+    return this.get(this.http, `${this.QuestionOption}/${data.id}`);
+  }
+
   deleteQuestionOption(params: any = {}) {
     return this.delete(this.http, `${this.QuestionOption}/${params.id}`);
   }
 
   createQuestionOption(data: any) {
     return this.post(this.http, this.QuestionOption, data);
+  }
+
+  updateQuestionOption(data: any) {
+    return this.put(this.http, `${this.QuestionOption}/${data.id}`, data);
   }
 
 

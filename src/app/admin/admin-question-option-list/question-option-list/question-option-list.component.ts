@@ -26,7 +26,7 @@ export class QuestionOptionListComponent implements OnInit {
   }
 
   getQuestionOptions() {
-    this.questionOptionServices.getQuestionOptions({ pageNumber: 0, pageSize: 10 }).subscribe((data) => {
+    this.questionOptionServices.getQuestionOptions({ pageNumber: 0, pageSize: 100 }).subscribe((data) => {
       this.questionOptionList = data;
     });
   }
