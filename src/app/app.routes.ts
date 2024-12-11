@@ -16,11 +16,14 @@ import { PersonDetailComponent } from './admin/admin-person-list/person-detail/p
 import { VacancyCreateComponent } from './admin/admin-vacancy-list/vacancy-create/vacancy-create.component';
 import { VacanciesListComponent } from './admin/admin-vacancy-list/vacancies-list/vacancies-list.component';
 import { RequirementCreateComponent } from './admin/admin-requirement-list/requirement-create/requirement-create.component';
+import { QuestionCreateComponent } from './admin/admin-question-list/question-create/question-create.component';
 
 export const routes: Routes = [
     { path: 'vacancy', component: VacancyListComponent },
     { path: 'vacancy/:id', component: VacancyComponent },
     { path: 'admin', component: AdminComponent, children: [
+      { path: '', redirectTo: 'people/list', pathMatch: 'full' },
+
       { path: 'people', component: AdminPersonListComponent,children:[
         {path: 'detail/:id', component: PersonDetailComponent},
         {path: 'list', component: PersonListComponent}
@@ -32,10 +35,10 @@ export const routes: Routes = [
       ] },
       
       { path: 'question', component: AdminQuestionListComponent, children: [
-        {path: 'create', component: QuestionListComponent},
+        {path: 'create', component: QuestionCreateComponent},
         {path: 'list', component: QuestionListComponent}
       ]},
-
+      
       { path: 'questionOption', component: AdminQuestionOptionListComponent, children:[
         {path: 'create', component: QuestionOptionCreateComponent},
         {path: 'list', component: QuestionOptionListComponent}
@@ -43,7 +46,8 @@ export const routes: Routes = [
       { path: 'examrequirement', component: AdminRequirementListComponent, children:[
         {path: 'create', component: RequirementCreateComponent},
         {path: 'list', component: RequirementListComponent}
-      ]}
+      ]},
+
     ]},
     { path: '', redirectTo: '/vacancy', pathMatch: 'full' }, // Default route
   ];

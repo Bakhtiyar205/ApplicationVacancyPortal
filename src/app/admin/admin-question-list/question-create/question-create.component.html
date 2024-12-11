@@ -1,1 +1,72 @@
-<p>question-create works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3>Create Question Option</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="vacancyId" class="form-label">Question</label>
+                <select
+                  id="vacancyId"
+                  formControlName="vacancyId"
+                  class="form-select"
+                  [ngClass]="{ 'is-invalid': questionForm.get('vacancyId')?.invalid && questionForm.get('vacancyId')?.touched }"
+                >
+                  <option *ngFor="let vacancies of vacancies.items" [value]="vacancies.id">
+                    {{ vacancies.title }}
+                  </option>
+                </select>
+                <div *ngIf="questionForm.get('vacancyId')?.invalid && questionForm.get('vacancyId')?.touched" class="invalid-feedback">
+                  Please select a vacancies.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="questionDetail" class="form-label">Question Detail</label>
+                <input
+                  type="text"
+                  id="questionDetail"
+                  formControlName="questionDetail"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': questionForm.get('questionDetail')?.invalid && questionForm.get('questionDetail')?.touched }"
+                />
+                <div *ngIf="questionForm.get('questionDetail')?.invalid && questionForm.get('questionDetail')?.touched" class="invalid-feedback">
+                    Question Detail is required.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="optionCount" class="form-label">Option Count</label>
+                <input
+                  type="text"
+                  id="optionCount"
+                  formControlName="optionCount"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': questionForm.get('optionCount')?.invalid && questionForm.get('optionCount')?.touched }"
+                />
+                <div *ngIf="questionForm.get('optionCount')?.invalid && questionForm.get('optionCount')?.touched" class="invalid-feedback">
+                    Option Count is required.
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-success" [disabled]="questionForm.invalid">Submit</button>
+  
+              <div *ngIf="submitted">
+                <div *ngIf="!errorMessage" class="alert alert-success mt-3">
+                  Question created successfully!
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                  {{ errorMessage }}
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

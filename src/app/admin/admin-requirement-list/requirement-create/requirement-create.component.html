@@ -1,1 +1,42 @@
-<p>requirement-create works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3>Create Exam Requirement</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="examForm" (ngSubmit)="onSubmit()">
+  
+              <div class="mb-3">
+                <label for="detail" class="form-label">Exam Requirement Detail</label>
+                <input
+                  type="text"
+                  id="detail"
+                  formControlName="detail"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': examForm.get('detail')?.invalid && examForm.get('detail')?.touched }"
+                />
+                <div *ngIf="examForm.get('detail')?.invalid && examForm.get('detail')?.touched" class="invalid-feedback">
+                    Exam Requirement Detail is required.
+                </div>
+              </div>
+
+              <div *ngIf="submitted">
+                <div *ngIf="!errorMessage" class="alert alert-success mt-3">
+                    Exam Requirement is created successfully!
+                  </div>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                  {{ errorMessage }}
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-success" [disabled]="examForm.invalid">Submit</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

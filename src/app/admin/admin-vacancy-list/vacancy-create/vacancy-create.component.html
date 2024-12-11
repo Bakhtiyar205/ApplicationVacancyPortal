@@ -1,1 +1,56 @@
-<p>vacancy-create works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3>Create Question Option</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="vacancyForm" (ngSubmit)="onSubmit()">
+  
+              <div class="mb-3">
+                <label for="title" class="form-label">Vacancy title</label>
+                <input
+                  type="text"
+                  id="title"
+                  formControlName="title"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': vacancyForm.get('title')?.invalid && vacancyForm.get('title')?.touched }"
+                />
+                <div *ngIf="vacancyForm.get('title')?.invalid && vacancyForm.get('title')?.touched" class="invalid-feedback">
+                    Vacancy Title is required.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label">Vacancy Description</label>
+                <input
+                  type="text"
+                  id="description"
+                  formControlName="description"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': vacancyForm.get('description')?.invalid && vacancyForm.get('title')?.touched }"
+                />
+                <div *ngIf="vacancyForm.get('description')?.invalid && vacancyForm.get('title')?.touched" class="invalid-feedback">
+                    Vacancy Description is required.
+                </div>
+              </div>
+
+              <div *ngIf="submitted">
+                <div *ngIf="!errorMessage" class="alert alert-success mt-3">
+                    Vacancy is created successfully!
+                  </div>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                  {{ errorMessage }}
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-success" [disabled]="vacancyForm.invalid">Submit</button>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

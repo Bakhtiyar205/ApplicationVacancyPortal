@@ -19,4 +19,10 @@ export class QuestionOptionService extends AppService {
   deleteQuestionOption(params: any = {}) {
     return this.delete(this.http, `${this.QuestionOption}/${params.id}`);
   }
+
+  createQuestionOption(data: any) {
+    return this.post(this.http, this.QuestionOption, data);
+  }
+
+
 }

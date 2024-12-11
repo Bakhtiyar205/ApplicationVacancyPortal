@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppService } from '../services/app/app.service';
 import { HttpClient } from '@angular/common/http';
+import { CreateExamRequirement } from './create.exam-requirement.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,9 @@ export class ExamRequirementService extends AppService {
 
    public deleteExamRequirements(params: any = {})  {
     return this.delete(this.http, `${this.ExamRequirement}/${params.id}`);
-  }
+   }
+
+   public createExamRequirements(data: CreateExamRequirement){
+    return this.post(this.http, this.ExamRequirement, data);
+   }
 }

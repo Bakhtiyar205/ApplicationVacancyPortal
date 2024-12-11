@@ -1,1 +1,57 @@
-<p>question-option-create works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h3>Create Question Option</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="questionOptionForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="questionId" class="form-label">Question</label>
+                <select
+                  id="questionId"
+                  formControlName="questionId"
+                  class="form-select"
+                  [ngClass]="{ 'is-invalid': questionOptionForm.get('questionId')?.invalid && questionOptionForm.get('questionId')?.touched }"
+                >
+                  <option *ngFor="let question of questions.items" [value]="question.id">
+                    {{ question.questionDetail }}
+                  </option>
+                </select>
+                <div *ngIf="questionOptionForm.get('questionId')?.invalid && questionOptionForm.get('questionId')?.touched" class="invalid-feedback">
+                  Please select a question.
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                <label for="option" class="form-label">Option</label>
+                <input
+                  type="text"
+                  id="option"
+                  formControlName="option"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': questionOptionForm.get('option')?.invalid && questionOptionForm.get('option')?.touched }"
+                />
+                <div *ngIf="questionOptionForm.get('option')?.invalid && questionOptionForm.get('option')?.touched" class="invalid-feedback">
+                  Option is required.
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-success" [disabled]="questionOptionForm.invalid">Submit</button>
+  
+              <div *ngIf="submitted">
+                <div *ngIf="!errorMessage" class="alert alert-success mt-3">
+                  Option created successfully!
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+                  {{ errorMessage }}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

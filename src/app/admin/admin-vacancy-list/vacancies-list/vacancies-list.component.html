@@ -7,7 +7,6 @@
     </thead>
     <tbody>
         <tr *ngFor="let vacancy of vacancyList?.items; let i = index">
-            <!-- Main Information Row -->
             <td col-9>
                 <span class="text-decoration-none">
                     {{ vacancy?.title }}
@@ -31,5 +30,16 @@
                 <strong>Error:</strong> {{ errorMessages }}
             </td>
         </tr>
+
+        <tr>
+            <td colspan="3" class="text-center text-danger">
+                <button 
+                    [routerLink]="'/admin/vacancy/create'"
+                    class="btn mx-1 btn-success px-5">
+                    <fa-icon [icon]="faPenNib"></fa-icon>
+                </button>
+            </td>
+        </tr>
+        
     </tbody>
 </table>
