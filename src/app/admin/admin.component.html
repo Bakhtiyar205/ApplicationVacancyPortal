@@ -5,6 +5,7 @@
       <div class="list-group">
           <button *ngFor="let section of sectionList, let i = index" class="list-group-item list-group-item-action btn-lg text-center active"
           [class.active]="activeItem === section?.id"
+          routerLink="/admin/{{section?.link}}"
           (click)="setActiveItem(section.id)">
               <i class="bi bi-person-fill"></i> {{section?.name}}
             </button>
@@ -15,9 +16,10 @@
       <div>
         <div class="card mb-3">
           <div class="card-body">
-            <ng-container *ngIf="currentComponent">
+            <router-outlet></router-outlet>
+            <!-- <ng-container *ngIf="currentComponent">
               <ng-container *ngComponentOutlet="currentComponent"></ng-container>
-            </ng-container>
+            </ng-container> -->
           </div>
         </div>
       </div>

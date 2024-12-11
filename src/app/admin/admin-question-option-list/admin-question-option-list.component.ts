@@ -1,55 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { QuestionOptionService } from '../../questionOption/question-option.service';
-import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faPenNib, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { finalize } from 'rxjs';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-admin-question-option-list',
-  imports: [RouterLink, CommonModule, FontAwesomeModule],
+  imports: [RouterOutlet],
   templateUrl: './admin-question-option-list.component.html',
   styleUrl: './admin-question-option-list.component.css'
 })
-export class AdminQuestionOptionListComponent implements OnInit {
-
-  questionOptionList: any;
-  faPenNib = faPenNib;
-  faTrashCan = faTrashCan;
-  errorMessages: string = '';
-
-  constructor(public questionOptionServices: QuestionOptionService) { }
-
-  ngOnInit(): void {
-    this.getQuestionOptions();
-  }
-
-  getQuestionOptions() {
-    this.questionOptionServices.getQuestionOptions({ pageNumber: 0, pageSize: 10 }).subscribe((data) => {
-      this.questionOptionList = data;
-    });
-  }
-
-  deleteQuestionOption(id: number) {
-    this.questionOptionServices.deleteQuestionOption({id:id})
-    .pipe(finalize(()=>{
-      this.getQuestionOptions();
-    }))
-    .subscribe({
-      next: (response) => {
-        console.log("Question Options Deleted", response);
-      },
-      error: (err) => {
-          this.errorMessages = err.error?.detail || 'An error occurred during submission.';
-          this.showMessageForDuration(this.errorMessages, 5000);
-      }
-    });
-  }
-
-  private showMessageForDuration(message: string, duration: number): void {
-    setTimeout(() => {
-      this.errorMessages = '';  
-    }, duration);
-  }
+export class AdminQuestionOptionListComponent {
 }

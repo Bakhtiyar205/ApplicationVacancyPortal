@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonService } from '../../person/person.service';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPenNib } from '@fortawesome/free-solid-svg-icons';
+import { PersonService } from '../../../person/person.service';
 
 @Component({
   selector: 'app-person-list',

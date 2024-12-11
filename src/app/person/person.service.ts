@@ -17,4 +17,8 @@ export class PersonService extends AppService {
   {
     return this.post(this.http, 'person', data);
   }
+
+  public getById(params: any = {}) {
+    return this.get(this.http, `person/${params.id}`);
+  }
 }

@@ -1,0 +1,39 @@
+<table class="table table-bordered text-center">
+    <thead class="thead-light">
+        <tr>
+            <th class="text-primary col-3">Vacancy</th>
+            <th class="text-secondary col-7">Question</th>
+            <th class="col-2">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let question of questionList?.items; let i = index">
+            <td>
+                <span class="text-decoration-none text-primary">
+                    {{ question?.vacancyName }}
+                </span>
+            </td>
+            <td>
+                <span class="text-decoration-none text-secondary">
+                    {{ question?.questionDetail }}
+                </span>
+            </td>
+            <td>
+                <button 
+                    [routerLink]="'/question/' + question?.id" 
+                    class="btn btn-primary">
+                    <fa-icon [icon]="faPenNib"></fa-icon>
+                </button>
+                 <button 
+                    (click)="deleteQuestion(question?.id)" 
+                    class="btn mx-1 btn-danger">
+                    <fa-icon [icon]="faTrashCan"></fa-icon>
+                </button>
+        </tr>
+        <tr *ngIf="errorMessages">
+            <td colspan="3" class="text-center text-danger">
+                <strong>Error:</strong> {{ errorMessages }}
+            </td>
+        </tr>
+    </tbody>
+</table>

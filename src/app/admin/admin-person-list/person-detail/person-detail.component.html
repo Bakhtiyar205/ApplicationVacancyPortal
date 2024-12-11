@@ -1,0 +1,37 @@
+<table class="table table-bordered text-center">
+    <tbody>
+        <tr *ngIf="person">
+            <!-- Main Information Row -->
+             <td>Name</td>
+            <td>{{ person?.name }}</td>
+        </tr>
+        <tr>
+            <td>Surname</td>
+            <td>{{ person?.surname }}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{ person?.email }}</td>
+        </tr>
+        <tr>
+            <td>Phone Number</td>
+            <td>{{ person?.phoneNumber }}</td>
+        </tr>
+        <tr>
+            <td>Vacancy List</td>
+            <td>
+                <span *ngFor="let vacancy of person.personVacancies; let index = index ;let last = last">
+                    {{vacancy.vacancyName}}{{!last ? ', ' : ''}}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Cv
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+</table>
