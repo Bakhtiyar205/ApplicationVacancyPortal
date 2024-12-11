@@ -20,7 +20,7 @@
         <tr>
             <td>Vacancy List</td>
             <td>
-                <span *ngFor="let vacancy of person.personVacancies; let index = index ;let last = last">
+                <span *ngFor="let vacancy of person?.personVacancies; let index = index ;let last = last">
                     {{vacancy.vacancyName}}{{!last ? ', ' : ''}}
                 </span>
             </td>

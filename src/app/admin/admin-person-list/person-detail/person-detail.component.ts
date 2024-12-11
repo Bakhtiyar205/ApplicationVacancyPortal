@@ -30,6 +30,7 @@ export class PersonDetailComponent implements OnInit {
       next: (response) => {
         this.person = response;
         console.log('Person:', response);
+        console.log('Person:', this.person.personVacancies);
       },
       error: (err) => {
         this.errorMessages = err.error?.detail || 'An error occurred during submission.';
