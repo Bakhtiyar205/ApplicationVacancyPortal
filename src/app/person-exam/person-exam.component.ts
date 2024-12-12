@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonQuestionService } from '../personQuestion/person-question.service';
 import { PersonQuestion } from '../personQuestion/person-question.model';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,7 @@ export class PersonExamComponent implements OnInit {
   id: number = 0;
   questionOptionId: number = 0;
 
-  constructor(private route: ActivatedRoute, public personQuestionService: PersonQuestionService) {
+  constructor(private router: Router,private route: ActivatedRoute, public personQuestionService: PersonQuestionService) {
   }
 
     ngOnInit(): void {
@@ -61,11 +61,15 @@ export class PersonExamComponent implements OnInit {
 
   submitAnswers(): void {
     this.stopTimer();
+
     this.id = this.personQuestions[this.currentQuestionIndex-1].id;
     this.questionOptionId = this.selectedAnswers[this.id];
     
     this.personQuestionService.editQuestion({id: this.id, questionOptionId: this.questionOptionId}).subscribe({
       next: (data) => {
+        this.router.navigate(['/uploadCv'],
+          {queryParams: { personId: this.queryParams.personId}}
+        )
       },
       error: (err) => {
         console.error(err);

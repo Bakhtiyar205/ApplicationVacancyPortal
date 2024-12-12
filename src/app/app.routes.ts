@@ -23,8 +23,10 @@ import { QuestionOptionUpdateComponent } from './admin/admin-question-option-lis
 import { RequirementUpdateComponent } from './admin/admin-requirement-list/requirement-update/requirement-update.component';
 import { AgreeExamComponent } from './agree-exam/agree-exam.component';
 import { PersonExamComponent } from './person-exam/person-exam.component';
+import { UploadCvComponent } from './upload-cv/upload-cv.component';
 
 export const routes: Routes = [
+    { path: 'uploadCv', component: UploadCvComponent },
     { path: 'personExam', component: PersonExamComponent },
     { path: 'examAgrement', component: AgreeExamComponent },
     { path: 'vacancy', component: VacancyListComponent },

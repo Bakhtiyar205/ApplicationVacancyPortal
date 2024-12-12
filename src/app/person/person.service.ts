@@ -29,4 +29,8 @@ export class PersonService extends AppService {
   public aggreExam(params: { id: number, vacancyId: number ,isAgree: boolean }): Observable<any> {
     return this.put(this.http, `person/${params.id}`, params);
   }
+
+  public uploadCv(params: { id: number, cv: FormData }): Observable<any> {
+    return this.put(this.http, `person/cv/${params.id}`, params.cv);
+  }
 }

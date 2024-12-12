@@ -63,20 +63,6 @@
                 </div>
               </div>
   
-              <!-- <div class="mb-3 d-none">
-                <label for="vacancyId" class="form-label">Vacancy ID</label>
-                <input
-                  type="text"
-                  id="vacancyId"
-                  formControlName="vacancyId"
-                  class="form-control"
-                  [ngClass]="{ 'is-invalid': applicationForm.get('vacancyId')?.invalid && applicationForm.get('vacancyId')?.touched }"
-                />
-                <div *ngIf="applicationForm.get('vacancyId')?.invalid && applicationForm.get('vacancyId')?.touched" class="invalid-feedback">
-                  Vacancy ID must be greater than 0.
-                </div>
-              </div> -->
-  
               <button type="submit" class="btn btn-success" [disabled]="applicationForm.invalid">Submit</button>
 
               <div *ngIf="submitted">
