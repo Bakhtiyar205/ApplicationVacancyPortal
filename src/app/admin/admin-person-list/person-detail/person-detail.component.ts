@@ -4,6 +4,9 @@ import { Person } from '../../../person/person.model';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { HttpsService } from '../../../services/https/https.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-person-detail',
@@ -20,7 +23,7 @@ export class PersonDetailComponent implements OnInit {
   test: Blob | any;
 
 
-  constructor(public personService: PersonService, private route: ActivatedRoute) { }
+  constructor(public personService: PersonService, private route: ActivatedRoute, public http: HttpClient) { }
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id')!; 
@@ -68,20 +71,23 @@ export class PersonDetailComponent implements OnInit {
   }
 
   download(id: number) {
-    console.log('ID:', id);
-    this.personService.getCv({ id: id })
-    .subscribe({
-      next: (response: Blob) => {
+    this.http.get('http://'+environment.host + 'person/cv/' + id, 
+        {observe: 'response', responseType: 'blob' }).subscribe({
+      next: (response: any) => {
+        this.test= new Blob([response.body],{type:'application/pdf'});
 
-        let blob: Blob = response as Blob;
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'cv.pdf';
+        var downloadURL = window.URL.createObjectURL(this.test);
+        var link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = "app.pdf";
         link.click();
-        window.URL.revokeObjectURL(url);
+      },
+      error: (err) => {
+        console.error('Error while downloading CV:', err);
+        this.errorMessages = 'Failed to download the CV.';
+        this.showMessageForDuration(this.errorMessages, 5000);
       }
-    });
+  })
   }
   
 

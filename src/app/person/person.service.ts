@@ -22,7 +22,7 @@ export class PersonService extends AppService {
     return this.get(this.http, `person/${params.id}`);
   }
 
-  public getCv(params: { id: number }): Observable<Blob> {
+  public getCv(params: { id: number }) {
     return this.get(this.http, `person/cv/${params.id}`, {observe: 'response', responseType: 'blob' });
   }
   
@@ -31,9 +31,6 @@ export class PersonService extends AppService {
   }
 
   public uploadCv(params: FormData): Observable<any> {
-    params.forEach((value, key) => {
-      console.log(key + ':' + value);
-    })
     return this.put(this.http, `person/cv`, params);
   }
 }
