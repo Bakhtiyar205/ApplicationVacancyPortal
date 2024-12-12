@@ -3,7 +3,7 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-header bg-primary text-white">
-            <h3>Create Question Option</h3>
+            <h3>Update Question Option</h3>
           </div>
           <div class="card-body">
             <form [formGroup]="vacancyForm" (ngSubmit)="onSubmit()">
@@ -50,9 +50,23 @@
                 </div>
               </div>
 
+              <div class="mb-3">
+                <label for="examQuestionCount" class="form-label">Vacancy Exam Count Limit</label>
+                <input
+                  type="text"
+                  id="examQuestionCount"
+                  formControlName="examQuestionCount"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': vacancyForm.get('examQuestionCount')?.invalid && vacancyForm.get('title')?.touched }"
+                />
+                <div *ngIf="vacancyForm.get('examQuestionCount')?.invalid && vacancyForm.get('title')?.touched" class="invalid-feedback">
+                    Vacancy Exam Count is required.
+                </div>
+              </div>
+
               <div *ngIf="submitted">
                 <div *ngIf="!errorMessage" class="alert alert-success mt-3">
-                    Vacancy is created successfully!
+                    Vacancy is Updated successfully!
                   </div>
                 <div *ngIf="errorMessage" class="alert alert-danger mt-3">
                   {{ errorMessage }}

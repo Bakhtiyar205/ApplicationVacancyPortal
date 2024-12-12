@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PersonService } from '../person/person.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-cv',
@@ -13,13 +15,13 @@ export class UploadCvComponent implements OnInit {
   selectedFile: File | null = null;
   fileName: string | null = null;
   uploadStatus: 'success' | 'error' | null = null;
-  id = 41;
+  id = 51;
+  isUploading: boolean = false; 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: PersonService, private router: Router) {}
   ngOnInit(): void {
   }
 
-  // Handle file selection
   onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -28,28 +30,31 @@ export class UploadCvComponent implements OnInit {
     }
   }
 
-  // Submit the form with the selected file
-  onSubmit(event: Event): void {
+  onSubmit(event: any): void {
     event.preventDefault();
+
     if (!this.selectedFile) {
       return;
     }
+    const formdata: FormData = new FormData();
+    formdata.set('file', this.selectedFile);
+    formdata.set('data',this.id.toString());
 
-    const formData = new FormData();
-    formData.append('cv', this.selectedFile, this.selectedFile.name);
+    this.isUploading = true;
 
-    // Call the upload method (replace with your actual API endpoint)
-    this.uploadFile(formData).subscribe({
+    this.uploadFile(formdata).subscribe({
       next: () => {
         this.uploadStatus = 'success';
       },
-      error: () => {
+      error: (err) => {
+        console.error(err);
+        this.isUploading = false;
         this.uploadStatus = 'error';
       }
     })
   }
 
   uploadFile(formData: FormData): Observable<any> {
-    return this.http.put('http://localhost:5025/api/person/cv/31', formData);
+    return this.http.uploadCv(formData);
   }
 }

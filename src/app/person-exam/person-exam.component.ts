@@ -62,7 +62,7 @@ export class PersonExamComponent implements OnInit {
   submitAnswers(): void {
     this.stopTimer();
 
-    this.id = this.personQuestions[this.currentQuestionIndex-1].id;
+    this.id = this.personQuestions[this.currentQuestionIndex].id;
     this.questionOptionId = this.selectedAnswers[this.id];
     
     this.personQuestionService.editQuestion({id: this.id, questionOptionId: this.questionOptionId}).subscribe({

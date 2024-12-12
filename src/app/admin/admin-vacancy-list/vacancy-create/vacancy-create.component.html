@@ -36,6 +36,20 @@
                 </div>
               </div>
 
+              <div class="mb-3">
+                <label for="examQuestionCount" class="form-label">Exam Question Count title</label>
+                <input
+                  type="text"
+                  id="examQuestionCount"
+                  formControlName="examQuestionCount"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': vacancyForm.get('examQuestionCount')?.invalid && vacancyForm.get('examQuestionCount')?.touched }"
+                />
+                <div *ngIf="vacancyForm.get('examQuestionCount')?.invalid && vacancyForm.get('examQuestionCount')?.touched" class="invalid-feedback">
+                  Exam Question Count is required.
+                </div>
+              </div>
+
               <div *ngIf="submitted">
                 <div *ngIf="!errorMessage" class="alert alert-success mt-3">
                     Vacancy is created successfully!

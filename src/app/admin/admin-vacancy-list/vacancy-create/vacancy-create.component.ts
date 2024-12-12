@@ -17,14 +17,14 @@ export class VacancyCreateComponent {
   constructor(private fb: FormBuilder, public examRequirementService: VacancyService){
     this.vacancyForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
-      description: ['', [Validators.required, Validators.minLength(3)]]
+      description: ['', [Validators.required, Validators.minLength(3)]],
+      examQuestionCount: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
     if(this.vacancyForm.valid){
       this.submitted = true;
-      const examRequirement = this.vacancyForm.value;
   
       this.examRequirementService.createVacancy(this.vacancyForm.value).subscribe({
           next: () => {

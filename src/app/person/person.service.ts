@@ -30,7 +30,10 @@ export class PersonService extends AppService {
     return this.put(this.http, `person/${params.id}`, params);
   }
 
-  public uploadCv(params: { id: number, cv: FormData }): Observable<any> {
-    return this.put(this.http, `person/cv/${params.id}`, params.cv);
+  public uploadCv(params: FormData): Observable<any> {
+    params.forEach((value, key) => {
+      console.log(key + ':' + value);
+    })
+    return this.put(this.http, `person/cv`, params);
   }
 }

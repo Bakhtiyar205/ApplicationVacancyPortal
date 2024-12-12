@@ -15,7 +15,8 @@ export class VacancyUpdateComponent implements OnInit {
   updateVacancy: UpdateVacancy ={
     id: 0,
     title: '',
-    description: ''
+    description: '',
+    examQuestionCount: 0
   }
 
   vacancyForm: FormGroup;
@@ -28,7 +29,8 @@ export class VacancyUpdateComponent implements OnInit {
     this.vacancyForm = this.fb.group({
       id: [this.updateVacancy.id, Validators.required],
       title: [this.updateVacancy.title, [Validators.required, Validators.minLength(3)]],
-      description: [this.updateVacancy.description, [Validators.required, Validators.minLength(3)]]
+      description: [this.updateVacancy.description, [Validators.required, Validators.minLength(3)]],
+      examQuestionCount: [this.updateVacancy.examQuestionCount, Validators.required]
     });
   }
 
