@@ -21,8 +21,12 @@ import { VacancyUpdateComponent } from './admin/admin-vacancy-list/vacancy-updat
 import { QuestionUpdateComponent } from './admin/admin-question-list/question-update/question-update.component';
 import { QuestionOptionUpdateComponent } from './admin/admin-question-option-list/question-option-update/question-option-update.component';
 import { RequirementUpdateComponent } from './admin/admin-requirement-list/requirement-update/requirement-update.component';
+import { AgreeExamComponent } from './agree-exam/agree-exam.component';
+import { PersonExamComponent } from './person-exam/person-exam.component';
 
 export const routes: Routes = [
+    { path: 'personExam', component: PersonExamComponent },
+    { path: 'examAgrement', component: AgreeExamComponent },
     { path: 'vacancy', component: VacancyListComponent },
     { path: 'vacancy/:id', component: VacancyComponent },
     { path: 'admin', component: AdminComponent, children: [

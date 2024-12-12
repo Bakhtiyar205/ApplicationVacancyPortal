@@ -3,6 +3,7 @@ import { PersonService } from '../../../person/person.service';
 import { Person } from '../../../person/person.model';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-person-detail',
@@ -16,6 +17,9 @@ export class PersonDetailComponent implements OnInit {
   id: number = 0;
 
 
+  test: Blob | any;
+
+
   constructor(public personService: PersonService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -25,6 +29,7 @@ export class PersonDetailComponent implements OnInit {
   }
 
   getPersonDetail(id: number){
+    console.log('ID:', id);
     this.personService.getById({id: id})
     .subscribe({
       next: (response) => {
@@ -39,6 +44,46 @@ export class PersonDetailComponent implements OnInit {
     }
     });
   }
+
+  getPersonCv(id: number): void {
+    this.personService.getCv({ id })
+      .subscribe({
+        next: (response: Blob) => {
+          console.log(response.type)
+
+          this.test = new Blob([response], {type: 'application/pdf'});
+
+          var downloadURL = window.URL.createObjectURL(response);
+          var link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = "app.pdf";
+          link.click();
+        },
+        error: (err) => {
+          console.error('Error while downloading CV:', err);
+          this.errorMessages = 'Failed to download the CV.';
+          this.showMessageForDuration(this.errorMessages, 5000);
+        }
+      });
+  }
+
+  download(id: number) {
+    console.log('ID:', id);
+    this.personService.getCv({ id: id })
+    .subscribe({
+      next: (response: Blob) => {
+
+        let blob: Blob = response as Blob;
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'cv.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+      }
+    });
+  }
+  
 
   private showMessageForDuration(message: string, duration: number): void {
     setTimeout(() => {

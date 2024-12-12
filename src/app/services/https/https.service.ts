@@ -11,13 +11,19 @@ import { environment } from '../../../environments/environment';
 export class HttpsService {
 
 
-  headers = new HttpHeaders().set('Content-type', 'application/json');
+  headers   = new HttpHeaders().set('Content-type', 'application/json');
   post_headers = new HttpHeaders().set('Content-type', 'application/json');
   constructor() { }
 
   public rootUrl: string = 'http://' + environment.host;
 
   get(http: HttpClient, resourceUrl: string, params: any = {}): Observable<any> {
+    return http.get<Response>(this.rootUrl + resourceUrl, {
+      params: params,
+    });
+  }
+
+  getDocument(http: HttpClient, resourceUrl: string, params: any = {}): Observable<any> {
     return http.get<Response>(this.rootUrl + resourceUrl, {
       params: params,
     });

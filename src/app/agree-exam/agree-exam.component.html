@@ -1,0 +1,27 @@
+<div class="container mt-2">
+    <table class="table table-bordered text-center">
+        <thead class="thead-light">
+            <tr>
+                <th class="col-9">Requirement Detail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let requirement of requirementList?.items, let i = index">
+                <td class="col-9">
+                    <span class="text-decoration-none">
+                        {{ requirement?.detail }}
+                    </span>
+                </td>
+            </tr>
+            <tr >
+                <td colspan="3" class="text-center text-danger">
+                    <button 
+                        (click) ="onSubmit()"
+                        class="btn mx-1 btn-success px-5">
+                        Agree Exam Requirement
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

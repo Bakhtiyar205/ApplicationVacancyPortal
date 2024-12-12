@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppService } from '../services/app/app.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Person } from './person.model';
 import { Observable } from 'rxjs';
 
@@ -20,5 +20,13 @@ export class PersonService extends AppService {
 
   public getById(params: any = {}) {
     return this.get(this.http, `person/${params.id}`);
+  }
+
+  public getCv(params: { id: number }): Observable<Blob> {
+    return this.get(this.http, `person/cv/${params.id}`, {observe: 'response', responseType: 'blob' });
+  }
+  
+  public aggreExam(params: { id: number, vacancyId: number ,isAgree: boolean }): Observable<any> {
+    return this.put(this.http, `person/${params.id}`, params);
   }
 }

@@ -4,6 +4,7 @@ export interface Person{
     surname: string;
     email: string;
     phone: string;
+    cvPath: string;
     personVacancies: PersonVacancy[];
 }
 

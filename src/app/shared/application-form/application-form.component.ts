@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, NgClass } from '@angular/common';
 import { PersonService } from '../../person/person.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-application-form',
@@ -16,7 +17,7 @@ export class ApplicationFormComponent implements OnInit, OnChanges {
   submitted: boolean = false;
   @Input() vacancyId: number = 0;
 
-  constructor(private fb: FormBuilder, public personService: PersonService) {
+  constructor(private fb: FormBuilder, public personService: PersonService, private router: Router) {
     this.applicationForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       surname: ['', [Validators.required, Validators.minLength(3)]],
@@ -43,11 +44,17 @@ export class ApplicationFormComponent implements OnInit, OnChanges {
   onSubmit(): void {
     this.submitted = true;  
     this.errorMessage = '';
+    console.log("vacancy id " + this.vacancyId);
 
     if (this.applicationForm.valid) {
       this.personService.applyForVacancy(this.applicationForm.value).subscribe({
-        next: () => {
+        next: (data) => {
           this.showMessageForDuration('Form submitted successfully!', 5000);
+          // this.router.navigate(['/examAggrement/', data.id]); 
+          this.router.navigate(['/examAgrement'], { 
+            queryParams: { personId: data.id, vacancyId: this.vacancyId }
+          });
+
         },
         error: (err) => {
           this.errorMessage = err.error?.detail || 'An error occurred during submission.';

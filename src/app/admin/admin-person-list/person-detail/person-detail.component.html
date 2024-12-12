@@ -30,7 +30,19 @@
                 Cv
             </td>
             <td>
-                
+                <span *ngIf="person?.cvPath; else noCv"
+                (click)="download(person.id)"
+                >
+                    {{person.cvPath}}
+                </span>
+                <ng-template #noCv>
+                    <span>No CV</span>
+                </ng-template>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span (click)="getPersonCv(person.id)">Edit</span>
             </td>
         </tr>
     </tbody>

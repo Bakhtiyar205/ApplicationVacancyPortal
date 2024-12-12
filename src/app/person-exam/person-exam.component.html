@@ -1,0 +1,65 @@
+
+
+
+   <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-lg">
+          <div class="card-header bg-primary text-white text-center">
+            <h4>Quiz</h4>
+          </div>
+          <div class="timer-box bg-light text-dark px-3 py-1 rounded">
+            Time Left: {{ minutes }}:{{ seconds | number: '2.0-0' }}
+          </div>
+          <div class="card-body">
+            <!-- Show Current Question -->
+            <div *ngIf="currentQuestionIndex < personQuestions.length">
+              <div class="mb-3">
+                <h5 class="text-secondary">
+                  <span class="badge bg-primary me-2">{{ currentQuestionIndex + 1 }}</span>
+                  {{ personQuestions[currentQuestionIndex].question.questionDetail }}
+                </h5>
+              </div>
+  
+              <!-- Options as Radio Buttons -->
+              <div *ngFor="let option of personQuestions[currentQuestionIndex].question.questionOptions" class="form-check mb-2">
+                <input
+                  type="radio"
+                  [id]="'option-' + option.id"
+                  class="form-check-input"
+                  [name]="'question-' + currentQuestionIndex"
+                  [value]="option.id"
+                  (change)="onOptionSelect(personQuestions[currentQuestionIndex].id, option.id)"
+                  [checked]="selectedAnswers[personQuestions[currentQuestionIndex].id] === option.id"
+                />
+                <label [for]="'option-' + option.id" class="form-check-label text-dark">
+                  {{ option.option }}
+                </label>
+              </div>
+            </div>
+  
+            <!-- Navigation Buttons -->
+            <div class="text-center mt-4">
+              <button
+                class="btn btn-primary px-4 py-2 me-2"
+                (click)="goToNextQuestion()"
+                *ngIf="currentQuestionIndex < personQuestions.length - 1"
+                [disabled]="!isQuestionAnswered()"
+              >
+                Next
+              </button>
+              <button
+                class="btn btn-success px-4 py-2"
+                (click)="submitAnswers()"
+                *ngIf="currentQuestionIndex === personQuestions.length - 1"
+                [disabled]="!isQuestionAnswered()"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
