@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PersonService } from '../person/person.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload-cv',
@@ -15,11 +15,17 @@ export class UploadCvComponent implements OnInit {
   selectedFile: File | null = null;
   fileName: string | null = null;
   uploadStatus: 'success' | 'error' | null = null;
-  id = 51;
+  id: string = '';
   isUploading: boolean = false; 
+  queryParams: any;
 
-  constructor(private http: PersonService, private router: Router) {}
+  constructor(private http: PersonService, private router: Router, private route: ActivatedRoute) {}
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.queryParams = params;
+      console.log('Received query params:', this.queryParams);
+    });
+    this.id = this.queryParams.personId;
   }
 
   onFileChange(event: any): void {
@@ -38,7 +44,7 @@ export class UploadCvComponent implements OnInit {
     }
     const formdata: FormData = new FormData();
     formdata.set('file', this.selectedFile);
-    formdata.set('data',this.id.toString());
+    formdata.set('data',this.id);
 
     this.isUploading = true;
 
