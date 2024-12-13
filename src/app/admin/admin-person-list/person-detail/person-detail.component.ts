@@ -15,9 +15,20 @@ import { environment } from '../../../../environments/environment';
   styleUrl: './person-detail.component.css'
 })
 export class PersonDetailComponent implements OnInit {
-  person: Person | any;
+  person: Person = {
+    id: 0,
+    name: '',
+    surname: '',
+    email: '',
+    phoneNumber: '',
+    cvPath: '',
+    correctAnswers: 0,
+    totalAnswers: 0, 
+    personVacancies: [],
+  };
   errorMessages: string = '';
   id: number = 0;
+  appType: string = '';
 
 
   test: Blob | any;
@@ -51,9 +62,9 @@ export class PersonDetailComponent implements OnInit {
   getPersonCv(id: number): void {
     this.personService.getCv({ id })
       .subscribe({
-        next: (response: Blob) => {
+        next: (response) => {
+          
           console.log(response.type)
-
           this.test = new Blob([response], {type: 'application/pdf'});
 
           var downloadURL = window.URL.createObjectURL(response);
@@ -74,13 +85,35 @@ export class PersonDetailComponent implements OnInit {
     this.http.get('http://'+environment.host + 'person/cv/' + id, 
         {observe: 'response', responseType: 'blob' }).subscribe({
       next: (response: any) => {
-        this.test= new Blob([response.body],{type:'application/pdf'});
+        const contentType = response.headers.get('Content-Type');
+          console.log('Content-Type:', contentType);
+
+          switch (contentType) {
+            case 'application/pdf':
+              this.appType='PDF';
+              break;
+    
+            case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+              this.appType='DOCX';
+              break;
+    
+            case 'application/msword':
+              this.appType='DOC';
+              break;
+    
+            default:
+              
+              break;
+          }
+        this.test= new Blob([response.body],{type:contentType});
 
         var downloadURL = window.URL.createObjectURL(this.test);
         var link = document.createElement('a');
         link.href = downloadURL;
-        link.download = "app.pdf";
-        link.click();
+        if(this.appType !== null){
+          link.download = 'app.'+this.appType;
+          link.click();
+        }
       },
       error: (err) => {
         console.error('Error while downloading CV:', err);

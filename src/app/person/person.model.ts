@@ -3,8 +3,10 @@ export interface Person{
     name: string;
     surname: string;
     email: string;
-    phone: string;
+    phoneNumber: string;
     cvPath: string;
+    correctAnswers: number;
+    totalAnswers: number;
     personVacancies: PersonVacancy[];
 }
 
